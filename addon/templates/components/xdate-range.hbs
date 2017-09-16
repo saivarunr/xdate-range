@@ -166,7 +166,7 @@
 		</div>
 	</div>
 	<div class="flex" style="text-align:right">
-		{{#paper-button raised=true}}Cancel{{/paper-button}}
+		{{#paper-button raised=true onClick=(action "cancel")}}Cancel{{/paper-button}}
 		{{#paper-button raised=true primary=true disabled=disbaledApply onClick=(action "sendDate")}}Apply{{/paper-button}}
 	</div>
 </div>
