@@ -262,6 +262,9 @@ export default Ember.Component.extend({
 						};
 			console.log(range);
 			this.sendAction('sendDate',range);
+		},
+		cancel(){
+			this.sendAction('cancel');
 		}
 	}
 });
