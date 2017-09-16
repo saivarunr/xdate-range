@@ -1,0 +1,1 @@
+export { default } from 'xdate-range/components/xdate-range';

@@ -1,0 +1,173 @@
+<div class="layout-column flex xdate-range">
+	<div class="flex">
+    	{{#paper-toolbar}}
+		  {{#paper-toolbar-tools}}
+		    {{#paper-button iconButton=true}}
+		    {{/paper-button}}
+		    <span class="flex"></span>
+				{{#paper-select
+				disabled=disableSelect
+				options=dateOptions
+				selected=selectedDateOption
+				onChange=(action (mut selectedDateOption))
+				as |state|}}
+				{{state.label}}
+				{{/paper-select}}
+		  {{/paper-toolbar-tools}}
+		{{/paper-toolbar}}
+	</div>
+	<div class="layout-row flex">
+		<div class="layout-column flex padding-10">
+			<div class="x-calendar-title">Start Date</div>
+			<center>
+			<div class="layout-row flex">
+				<div class="flex-20">
+					{{#if showStartCalendar}}
+					{{#paper-button class="x-calendar-button" iconButton=true onClick=(action "previousStart")}}{{paper-icon "keyboard_arrow_left"}}{{/paper-button}}
+					{{/if}}
+				</div>
+				<div class="flex-60">
+					{{#if showStartCalendar}}
+						{{#paper-button class="x-calendar-button" onClick=(action "startDateFlatButton")}}{{startDateValue}}{{/paper-button}}
+					{{else}}
+						{{paper-input type="number"  class="flex-30" value=startYear min="0" onChange=(action "startYearChange")}}
+					{{/if}}
+				</div>
+				<div class="flex-20">
+					{{#if showStartCalendar}}
+					{{#paper-button class="x-calendar-button" iconButton=true onClick=(action "nextStart")}}{{paper-icon "keyboard_arrow_right"}}{{/paper-button}}
+					{{/if}}
+				</div>
+			</div>
+			</center>
+			<div class="flex">
+				{{#if showStartCalendar}}
+				<center>
+				<table>
+					<thead>
+						<tr style="text-align:center">
+							<td>Sun</td>
+							<td>Mon</td>
+							<td>Tue</td>
+							<td>Wed</td>
+							<td>Thu</td>
+							<td>Fri</td>
+							<td>Sat</td>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each startRange as |mm|}}
+							<tr>
+								{{#each mm as |m|}}
+									<td>
+										{{#if m}}
+											{{#if (eq m startDay)}}
+												{{#paper-button class="zero-everything" raised=true primary=true mini=true onClick=(action "setStartDay" m)}}{{m}}{{/paper-button}}
+											{{else}}
+												{{#paper-button class="zero-everything" raised=true mini=true onClick=(action "setStartDay" m)}}{{m}}{{/paper-button}}
+											{{/if}}
+
+											
+										{{/if}}
+									</td>
+								{{/each}}
+							</tr>
+						{{/each}}
+					</tbody>
+				</table>
+				</center>
+				{{else}}
+					<center>
+					<tbody>
+					{{#each months as |month|}}
+						<tr>
+							{{#each month as |m|}}
+								<td>{{#paper-button raised=true onClick=(action "setStartMonth" m)}}{{m.label}}{{/paper-button}}</td>
+							{{/each}}
+						</tr>
+					{{/each}}
+					</tbody>
+					</center>
+				{{/if}}
+			</div>
+		</div>
+		<div class="layout-column flex  padding-10">
+			<div class="x-calendar-title">End Date</div>
+			<center>
+			<div class="layout-row flex">
+				<div class="flex-20">
+					{{#if showEndCalendar}}
+					{{#paper-button class="x-calendar-button" iconButton=true onClick=(action "previousEnd")}}{{paper-icon "keyboard_arrow_left"}}{{/paper-button}}
+					{{/if}}
+				</div>
+				<div class="flex-60">
+					{{#if showEndCalendar}}
+
+						{{#paper-button class="x-calendar-button" onClick=(action "endDateFlatButton")}}{{endDateValue}}{{/paper-button}}
+					{{else}}
+						{{paper-input min="0" class="flex-30" value=endYear onChange=(action "endYearChange")}}
+					{{/if}}
+				</div>
+				<div class="flex-20">
+					{{#if showEndCalendar}}
+					{{#paper-button class="x-calendar-button" iconButton=true onClick=(action "nextEnd")}}{{paper-icon "keyboard_arrow_right"}}{{/paper-button}}
+					{{/if}}
+				</div>
+			</div>
+			</center>
+			<div class="flex">
+				{{#if showEndCalendar}}
+				<center>
+				<table>
+					<thead>
+						<tr style="text-align:center">
+							<td>Sun</td>
+							<td>Mon</td>
+							<td>Tue</td>
+							<td>Wed</td>
+							<td>Thu</td>
+							<td>Fri</td>
+							<td>Sat</td>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each endRange as |mm|}}
+							<tr>
+								{{#each mm as |m|}}
+									<td>
+										{{#if m}}
+											{{#if (eq m endDay)}}
+												{{#paper-button class="zero-everything" raised=true primary=true mini=true onClick=(action "setEndDay" m)}}{{m}}{{/paper-button}}
+											{{else}}
+												{{#paper-button class="zero-everything" raised=true mini=true onClick=(action "setEndDay" m)}}{{m}}{{/paper-button}}
+											{{/if}}
+										{{/if}}
+									</td>
+								{{/each}}
+							</tr>
+						{{/each}}
+					</tbody>
+				</table>
+				</center>
+				{{else}}
+					<center>
+					<tbody>
+					{{#each months as |month|}}
+						<tr>
+							{{#each month as |m|}}
+								<td>{{#paper-button raised=true onClick=(action "setEndMonth" m)}}{{m.label}}{{/paper-button}}</td>
+							{{/each}}
+						</tr>
+					{{/each}}
+					</tbody>
+					</center>
+				{{/if}}
+			</div>
+		</div>
+	</div>
+	<div class="flex" style="text-align:right">
+		{{#paper-button raised=true}}Cancel{{/paper-button}}
+		{{#paper-button raised=true primary=true disabled=disbaledApply onClick=(action "sendDate")}}Apply{{/paper-button}}
+	</div>
+</div>
+{{yield}}

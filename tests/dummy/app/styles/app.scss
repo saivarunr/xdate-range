@@ -1,0 +1,23 @@
+@import 'ember-paper';
+.xdate-range{
+	.x-calendar-button{
+		border: 0;
+		margin: 0;
+		padding: 0;
+	}
+}
+.zero-everything{
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+.md-select-menu-container.md-active{
+	z-index: 200;
+}
+.padding-10{
+	padding: 10px;
+}
+.x-calendar-title{
+	background-color: #dcdcdc;
+	text-align: center;
+}
